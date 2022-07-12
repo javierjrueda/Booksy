@@ -6,7 +6,6 @@ Booksy is a website that allows you to manage your personal library.
 ### Features:
 - It has a public and a private zone.
 - More coming soon :)
-</br>
 
 ### Stack:
 <p>
