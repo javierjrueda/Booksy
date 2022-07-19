@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Box, TextField, Typography, Grid } from "@mui/material";
-import RoundedButton from "components/ui/Button";
+import RoundedButton from "components/ui/RoundedButton";
 import { layout } from "theme/layout";
 import { useAuthContext } from "contexts/AuthContext";
+import apiClient from "utils/apiClient";
 
 export default function LoginView(
   formValues,
@@ -10,24 +11,16 @@ export default function LoginView(
   handleInputChange
 ) {
   const { login } = useAuthContext();
+
   const [form, setForm] = useState({
-    email: "javier.artkine@gmail.com",
+    username: "javier.artkine@gmail.com",
     password: "hola1234",
   });
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch(
-        "https://librarify.latteandfront.es/api/login_check",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            username: form.email,
-            password: form.password,
-          }),
-        }
-      );
+      const response = await apiClient.post("login_check", form);
       if (response.ok) {
         login();
       } else {
@@ -73,10 +66,10 @@ export default function LoginView(
           <Grid item>
             <TextField
               sx={{ minWidth: 250 }}
-              id="email"
-              name="email"
+              id="username"
+              name="username"
               label="Email"
-              defaultValue={form.email}
+              defaultValue={form.username}
               onChange={handleChange}
             />
           </Grid>

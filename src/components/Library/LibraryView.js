@@ -1,7 +1,11 @@
-import { Box } from "@mui/material";
+import { Typography } from "@mui/material";
+import { useAuthContext } from "contexts/AuthContext";
 
 export default function LibraryView() {
+  const { isAuthenticated } = useAuthContext();
   return (
-    <Box sx={{ width: 400, height: 400, backgroundColor: "black" }}>HI</Box>
+    <Typography variant="h4" color={"primary"} mt={10}>
+      👋🏼 Hi @user, welcome to your Library – {isAuthenticated}
+    </Typography>
   );
 }
